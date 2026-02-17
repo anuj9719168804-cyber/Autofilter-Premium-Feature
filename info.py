@@ -286,7 +286,7 @@ import threading
 from flask import Flask
 from telebot import TeleBot
 
-TOKEN = "YOUR_BOT_TOKEN"
+TOKEN = "8598500449:AAH0mHAltaUyNYxwd46-sN-uDmAazI40KWI"
 bot = TeleBot(TOKEN)
 
 app = Flask(__name__)
