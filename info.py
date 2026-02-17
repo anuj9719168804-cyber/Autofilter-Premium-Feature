@@ -304,3 +304,6 @@ if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+    @bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, "Bot working ✅")
