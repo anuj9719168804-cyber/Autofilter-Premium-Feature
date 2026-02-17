@@ -282,16 +282,25 @@ LOG_STR += (f"CUSTOM_FILE_CAPTION enabled with value {CUSTOM_FILE_CAPTION}, your
 LOG_STR += ("Long IMDB storyline enabled." if LONG_IMDB_DESCRIPTION else "LONG_IMDB_DESCRIPTION is disabled, Plot will be shorter.\n")
 LOG_STR += ("Spell Check Mode is enabled, bot will be suggesting related movies if movie name is misspelled.\n" if SPELL_CHECK_REPLY else "Spell Check Mode is disabled.\n")
 import os
+import threading
 from flask import Flask
-from threading import Thread
+from telebot import TeleBot
+
+TOKEN = "YOUR_BOT_TOKEN"
+bot = TeleBot(TOKEN)
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot Running"
+    return "Bot is running"
 
-def run():
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+def run_bot():
+    bot.infinity_polling()
 
-Thread(target=run).start()
+if __name__ == "__main__":
+    t = threading.Thread(target=run_bot)
+    t.start()
+
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
