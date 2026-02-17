@@ -281,3 +281,17 @@ LOG_STR += ("BUTTON_MODE is found, filename and file size will be shown in a sin
 LOG_STR += (f"CUSTOM_FILE_CAPTION enabled with value {CUSTOM_FILE_CAPTION}, your files will be sent along with this customized caption.\n" if CUSTOM_FILE_CAPTION else "No CUSTOM_FILE_CAPTION Found, Default captions of file will be used.\n")
 LOG_STR += ("Long IMDB storyline enabled." if LONG_IMDB_DESCRIPTION else "LONG_IMDB_DESCRIPTION is disabled, Plot will be shorter.\n")
 LOG_STR += ("Spell Check Mode is enabled, bot will be suggesting related movies if movie name is misspelled.\n" if SPELL_CHECK_REPLY else "Spell Check Mode is disabled.\n")
+import os
+from flask import Flask
+from threading import Thread
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot Running"
+
+def run():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
+Thread(target=run).start()
